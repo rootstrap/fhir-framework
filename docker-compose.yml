@@ -1,0 +1,51 @@
+version: "3"  
+services:  
+  spark:
+    container_name: spark
+    restart: always
+    image: sparkfhir/spark:r4-latest
+    environment:
+      - StoreSettings__ConnectionString=mongodb://root:CosmicTopSecret@mongodb:27017/spark?authSource=admin
+      - SparkSettings__Endpoint=http://localhost:5555/fhir
+    ports:
+      - "5555:80"
+      - "44344:443"
+    depends_on:
+      - mongodb
+      
+  mongodb:
+    container_name: mongodb
+    image: sparkfhir/mongo:r4-latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: CosmicTopSecret
+    ports:
+      - "27017:27017"
+    volumes:
+      - r4-db-volume:/data/db
+
+  bulk-data-fhir-client:
+    container_name: bulk-data-fhir-client
+    image: rootstrap/bulk-data-fhir-client:latest
+    depends_on: 
+      - bulk-data-fhir-server
+      - spark
+    environment:
+      - SPARK_FHIR_URL=http://spark:80/fhir/
+      - PYTHONUNBUFFERED=0
+    volumes:
+      - r4-download-data:/downloads
+
+  bulk-data-fhir-server:
+    container_name: bulk-data-fhir-server
+    restart: always
+    image: rootstrap/bulk-data-fhir-server:latest
+    environment:
+      - BASE_URL=http://bulk-data-fhir-server:9443
+    ports:
+      - "9443:9443"
+ 
+
+volumes:
+  r4-db-volume:
+  r4-download-data:
