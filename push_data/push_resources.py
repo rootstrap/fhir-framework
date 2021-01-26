@@ -58,5 +58,5 @@ def push_data(input_dir, fhir_url="http://localhost:5555/fhir/"):
 
 if __name__ == "__main__":
     inputdir = os.getenv('DATA_PATH', '/data/') 
-    url = os.getenv('SPARK_FHIR_URL', 'http://localhost:5555/fhir/')
+    url = os.getenv('FHIR_URL', 'http://localhost:5555/fhir/')
     push_data(inputdir, url)

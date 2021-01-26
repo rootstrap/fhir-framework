@@ -26,7 +26,7 @@ services:
 
   bulk-data-fhir-client:
     container_name: bulk-data-fhir-client
-    image: bulk-data-fhir-client:latest
+    image: rootstrap/bulk-data-fhir-client:latest
     depends_on: 
       - bulk-data-fhir-server
     volumes:
@@ -34,13 +34,13 @@ services:
 
   push-fhir-data:
     container_name: push-fhir-data
-    image: push-fhir-data:latest
+    image: rootstrap/push-fhir-data:latest
     restart: always
     depends_on: 
       - bulk-data-fhir-client
       - spark
     environment:
-      - SPARK_FHIR_URL=http://spark:80/fhir/
+      - FHIR_URL=http://spark:80/fhir/
       - PYTHONUNBUFFERED=1
       - DATA_PATH=/data/
     volumes:

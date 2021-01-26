@@ -1,51 +1,34 @@
-# fhir-framework
+# FHIR Framework
 
-Fhir server to download generated patient's data. It consist of the following components:
+Fhir server to download generated patient's data. It consist of the following components:  
 
-1. [Fhir Server](https://github.com/FirelyTeam/spark/)
-The Fhir Server implements FHIR specification, exposes a REST API to access FHIR data. 
+**[Fhir Server](https://github.com/FirelyTeam/spark/)**   
+The Fhir Server implements FHIR specification, exposes a REST API to access FHIR data.   
 
-2. MongoDB 
-This database is used by the Fhir Server to store the information. 
+**MongoDB**   
+This database is used by the Fhir Server to store the information.   
 
-3. [Bulk Data Server](https://github.com/smart-on-fhir/bulk-data-server.git)
-Exposes an API to generate Fhir resources.
+**[Bulk Data Server](bulk-data-server/)**  
+Exposes an API to generate Fhir resources.   
 
-4. Bulk Data Client
-Consumes the API of the bulk data server and saves it locally. [Here](https://github.com/smart-on-fhir/sample-apps-stu3/tree/master/fhir-downloader) is the implementation of the client. 
+**[Bulk Data Client](bulk-data-client/)**
+Consumes the API of the bulk data server and saves it locally.   
 
-5. Push Data:
-A python script to push resources files to an Fhir Server. 
+**[Push Data](push-data/)**
+A python script to push resources files to an Fhir Server.    
+
+![](images/diagram_fhir_prototype.png)   
 
 ## Execution 
 
 ```bash 
-	docker-compose up
-```
+	docker-compose up  
+```   
 
-You can access to the server at [http://localhost:5555/](http://localhost:5555/). 
+You can access to the server at [http://localhost:5555/](http://localhost:5555/).   
 
-## Configuration / Environment variables 
+## Docker compose 
 
-### Fhir Server 
-It is necessary to specify the following environment variables:
-- StoreSettings__ConnectionString: mongodb url
-- SparkSettings__Endpoint: url that the server will be listening 
+The file [docker-compose.yml](docker-compose.yml) starts each of the components as a docker container.      
 
-### MongoDB
-User and password  
-
-### Bulk Data Server
-It is necessary to SPARK_FHIR_URL to set the url for spark server.  
-
-### Bulk Data Client
-1. The configuration file [config.json](bulk-data-client/config.json). Contains the information to access the bulk data server. 
-In case you need another configuration, you can re-build the image with the new config.json file. 
-
-2. Set the environment variable BASE_URL with the url that the bulk data server is listening 
-
-### Push Data
-The following environment variables are set:
-- SPARK_FHIR_URL: url where spark Fhir server is listening 
-- PYTHONUNBUFFERED: set to 1 if you want to see the output of the python script 
-- DATA_PATH: url where data to be uploaded to the server is stored 
+In this file you can configure the environment variables such as user and password for the database and the server url. In each section you can find more information for each component. 
