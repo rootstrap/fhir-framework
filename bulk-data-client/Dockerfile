@@ -14,9 +14,4 @@ WORKDIR sample-apps-stu3/fhir-downloader
 
 RUN npm install
 
-ENV SPARK_FHIR_URL=http://localhost:9443/fhir/
-
-COPY push_resources.py /sample-apps-stu3/fhir-downloader/
-
-CMD ["python", "push_resources.py"]
-
+CMD ["node", ".", "-d", "downloads"]

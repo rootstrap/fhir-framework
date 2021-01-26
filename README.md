@@ -13,7 +13,9 @@ Exposes an API to generate Fhir resources.
 
 4. Bulk Data Client
 Consumes the API of the bulk data server and saves it locally. [Here](https://github.com/smart-on-fhir/sample-apps-stu3/tree/master/fhir-downloader) is the implementation of the client. 
-A python script is executed to push these resources to the Fhir Server. 
+
+5. Push Data:
+A python script to push resources files to an Fhir Server. 
 
 ## Execution 
 
@@ -41,3 +43,9 @@ It is necessary to SPARK_FHIR_URL to set the url for spark server.
 In case you need another configuration, you can re-build the image with the new config.json file. 
 
 2. Set the environment variable BASE_URL with the url that the bulk data server is listening 
+
+### Push Data
+The following environment variables are set:
+- SPARK_FHIR_URL: url where spark Fhir server is listening 
+- PYTHONUNBUFFERED: set to 1 if you want to see the output of the python script 
+- DATA_PATH: url where data to be uploaded to the server is stored 
