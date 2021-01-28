@@ -1,11 +1,10 @@
 Bulk Data Server
 -----------------
 
-Depends on [Bulk Data Server](https://github.com/smart-on-fhir/bulk-data-server.git)   
+This server exposes an API to generate bulk Fhir data. 
 
-- Generates bulk fhir data    
-- Exposes an API    
-- The image can be found at [rootstrap/bulk-fhir-data-server](https://hub.docker.com/repository/docker/rootstrap/bulk-data-fhir-server)  
+Depends on [Bulk Data Server](https://github.com/smart-on-fhir/bulk-data-server.git)   
+The image can be found at [rootstrap/bulk-fhir-data-server](https://hub.docker.com/repository/docker/rootstrap/bulk-data-fhir-server)  
 
 ## Environment variables    
 It is necessary to BASE_URL to set the url to expose.     
