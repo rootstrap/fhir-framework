@@ -1,7 +1,7 @@
-Push Data
-----------
+Push FHIR Data
+--------------
 
-This is a python script that reads files in a directory and:   
+This is a python script that reads FHIR files in a directory and:   
 - For each file divides it into multiple resources.     
 - Then, pushes each resource to the specified FHIR server.      
 - After pushing resources contained in a file, removes the file from the directory   
